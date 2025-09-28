@@ -4,26 +4,26 @@
 FROM openjdk:17-jdk-slim AS builder
 WORKDIR /app
 
-# 1. Copy the necessary files for the Maven build
-# Copying pom.xml first allows Docker to cache the dependencies layer
+# Copy the necessary files for the Maven build
 COPY pom.xml .
 COPY src ./src
 
-# 2. Build the application inside the container
-# Use the cache mount for Maven dependencies for faster subsequent builds
+# Build the application inside the container
 RUN --mount=type=cache,target=/root/.m2 mvn clean package -DskipTests
 
 # ------------------------------------
 # Stage 2: Create the Final Runtime Image
 # ------------------------------------
-# Use a lighter JRE image for the final production container
-FROM openjdk:17-jre-slim
+# 
+# FIX: Changed 'openjdk:17-jre-slim' to the more specific 'eclipse-temurin:17-jre-alpine'
+# The Eclipse Temurin images are very reliable and 'alpine' is a tiny, secure base.
+#
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# 3. Copy the built JAR from the builder stage
-# This is the crucial line that solves the "no such file or directory" error
+# Copy the built JAR from the builder stage
 COPY --from=builder /app/target/optimus-0.0.1-SNAPSHOT.jar app.jar
 
-# 4. Define the port and startup command
+# Define the port and startup command
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
