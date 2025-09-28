@@ -1,7 +1,6 @@
 package com.optimuscreations.optimus.controller;
 
 import com.optimuscreations.optimus.entity.Product;
-import com.optimuscreations.optimus.entity.ProductDto;
 import com.optimuscreations.optimus.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -74,8 +73,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDto productDto) {
-        Product savedProduct = productService.addProduct(productDto);
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
+        Product savedProduct = productService.createProduct(product);
         return ResponseEntity.ok(savedProduct);
     }
 

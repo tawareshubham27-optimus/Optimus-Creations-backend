@@ -38,6 +38,12 @@ public class Product {
     @Column(name = "image_url")
     private List<String> imageUrls;
 
+    @Column(name = "stl_file_url")
+    private String stlFileUrl;
+
+    @Column(name = "cad_file_url")
+    private String cadFileUrl;
+
     @Column(name = "print_time_hours")
     private Integer printTimeHours;
 
@@ -88,6 +94,12 @@ public class Product {
 
     public List<String> getImageUrls() { return imageUrls; }
     public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
+
+    public String getStlFileUrl() { return stlFileUrl; }
+    public void setStlFileUrl(String stlFileUrl) { this.stlFileUrl = stlFileUrl; }
+
+    public String getCadFileUrl() { return cadFileUrl; }
+    public void setCadFileUrl(String cadFileUrl) { this.cadFileUrl = cadFileUrl; }
 
     public Integer getPrintTimeHours() { return printTimeHours; }
     public void setPrintTimeHours(Integer printTimeHours) { this.printTimeHours = printTimeHours; }
