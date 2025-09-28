@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/files")
+@CrossOrigin(origins = "${app.cors.allowed-origins}")
 public class FileController {
 
     @Autowired

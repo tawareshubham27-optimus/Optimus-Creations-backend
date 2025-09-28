@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/queries")
+@CrossOrigin(origins = "${app.cors.allowed-origins}")
 public class UserQueryController {
 
     @Autowired
