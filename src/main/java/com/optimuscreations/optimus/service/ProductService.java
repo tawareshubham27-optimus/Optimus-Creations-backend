@@ -1,12 +1,7 @@
 package com.optimuscreations.optimus.service;
 
-import com.optimuscreations.optimus.entity.Category;
 import com.optimuscreations.optimus.entity.Product;
-import com.optimuscreations.optimus.entity.ProductDto;
-
 import com.optimuscreations.optimus.repository.ProductRepository;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,9 +18,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private CategoryService categoryService; 
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -64,6 +56,8 @@ public class ProductService {
             product.setPrice(productDetails.getPrice());
             product.setCategory(productDetails.getCategory());
             product.setImageUrls(productDetails.getImageUrls());
+            product.setStlFileUrl(productDetails.getStlFileUrl());
+            product.setCadFileUrl(productDetails.getCadFileUrl());
             product.setPrintTimeHours(productDetails.getPrintTimeHours());
             product.setMaterialType(productDetails.getMaterialType());
             product.setInStock(productDetails.getInStock());
@@ -75,27 +69,5 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
-    }
-
-    public Product addProduct(ProductDto productDto) {
-         Product product = new Product();
-       if (productDto.getCategoryId() != null && productDto.getCategoryId() > 0) {
-           Category category = categoryService.getCategoryById(productDto.getCategoryId())
-               .orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
-               product.setCategory(category);
-         }
-
-           product.setName(productDto.getName());
-           product.setDescription(productDto.getDescription());
-           product.setPrice(productDto.getPrice());
-           product.setImageUrls(List.of(productDto.getImageUrl()));
-           product.setPrintTimeHours(productDto.getDeliveryTime());
-           product.setImageUrls(List.of(productDto.getImageUrl()));
-           product.setInStock(productDto.getInStock());
-           product.setFeatured(productDto.getFeatured());
-           Product createdProduct = productRepository.save(product);
-
-
-           return createdProduct;
     }
 }
