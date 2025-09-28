@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR into the container
-COPY target/Optimus-Creations-backend-0.0.1-SNAPSHOT.jar app.jar
+COPY target/optimus-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port your app runs on
 EXPOSE 8080
