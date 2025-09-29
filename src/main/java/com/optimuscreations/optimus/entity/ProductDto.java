@@ -1,6 +1,7 @@
 package com.optimuscreations.optimus.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductDto {
     
@@ -14,8 +15,7 @@ public class ProductDto {
 
     private Long categoryId;
 
- 
-    private String imageUrl;
+    private List<String> imageUrls;
 
     private Boolean inStock = true;
 
@@ -39,8 +39,8 @@ public class ProductDto {
     public Long getCategoryId() { return categoryId; }
     public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
 
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public List<String> getImageUrls() { return imageUrls; }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
 
     public Boolean getInStock() { return inStock; }
     public void setInStock(Boolean inStock) { this.inStock = inStock; }
