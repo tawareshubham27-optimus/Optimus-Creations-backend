@@ -3,8 +3,6 @@ package com.optimuscreations.optimus.service;
 import com.optimuscreations.optimus.entity.Category;
 import com.optimuscreations.optimus.entity.Product;
 import com.optimuscreations.optimus.entity.ProductDto;
-import com.optimuscreations.optimus.entity.ProductImages;
-import com.optimuscreations.optimus.repository.ProductImagesRepository;
 import com.optimuscreations.optimus.repository.ProductRepository;
 
 
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +24,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private CategoryService categoryService; 
-
-    @Autowired
-    private ProductImagesRepository productImagesRepository;    
+    private CategoryService categoryService;   
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -98,16 +92,7 @@ public class ProductService {
            product.setInStock(productDto.getInStock());
            product.setFeatured(productDto.getFeatured());
            Product createdProduct = productRepository.save(product);
-           if (productDto.getImageUrls() != null && !productDto.getImageUrls().isEmpty()) {
-               List<ProductImages> productImages = new ArrayList<>();
-                for (String imageUrl : productDto.getImageUrls()) {
-                     ProductImages img = new ProductImages();
-                     img.setProduct(createdProduct);
-                     img.setImageUrl(imageUrl);
-                     productImages.add(img);
-                }
-                productImagesRepository.saveAll(productImages);   
-           }
+           
 
 
            return createdProduct;
