@@ -14,7 +14,7 @@ public class MyScheduledTasks {
     }
     
     // Cron expression: second, minute, hour, day of month, month, day of week
-    @Scheduled(cron = "0 * * * * ?")  // Every day at 9:00 AM
+    @Scheduled(cron = "0 */15 * * * *")  // Every day at 9:00 AM
     public void dailyTask() {
         System.out.println("Product inventory check executed at"+System.currentTimeMillis()+ "\n"+ productService.getAllProducts());
     }
